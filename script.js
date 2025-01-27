@@ -8,6 +8,7 @@ const category = document.getElementById("category")
 
 //seleciona os elementos da lista.
 const expenseList = document.querySelector("ul")
+const expensesQuantity = document.querySelector("aside header p  span")
 
 // Adiciona um evento de input ao elemento "amount"
 amount.oninput = () => {
@@ -91,9 +92,48 @@ function expenseAdd(newExpense) {
         // Adiciona o item de despesa à lista de despesas
         expenseList.append(expenseItem)
 
+        //Atualiza o valor total das despesas
+        updateTotals()
+
     } catch (error) {
         // Exibe um alerta em caso de erro
         alert("Erro")
         console.log(error)
+    }
+}
+
+// Função para atualizar o total das despesas
+function updateTotals() {
+    try {
+        // Obtém todos os itens da lista de despesas
+        const items = expenseList.children
+
+        // Atualiza a quantidade de despesas
+        expensesQuantity.textContent = `${items.length} ${items.length > 1 ? "despesas" : "despesa"}`
+
+        let total = 0
+
+        // Itera sobre cada item da lista de despesas
+        for (let i = 0; i < items.length; i++) {
+            // Seleciona o valor da despesa
+            const itemAmount = items[i].querySelector(".expense-amount");
+
+            // Remove caracteres não numéricos e converte para número
+            let value = itemAmount.textContent.replace(/[^\d]/g, "").replace(",", ".")
+
+            value = parseFloat(value)
+
+            // Verifica se o valor é um número válido
+            if (isNaN(value)) {
+                return alert("Erro ao somar o total")
+            }
+
+            // Adiciona o valor ao total
+            total += Number(value)
+        }
+    } catch (error) {
+        // Exibe um alerta em caso de erro
+        console.log(error)
+        alert("Erro ao somar o total")
     }
 }
