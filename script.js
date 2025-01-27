@@ -96,6 +96,9 @@ function expenseAdd(newExpense) {
         //Atualiza o valor total das despesas
         updateTotals()
 
+        //limpa o formulario
+        formClear()
+
     } catch (error) {
         // Exibe um alerta em caso de erro
         alert("Erro")
@@ -166,3 +169,12 @@ expenseList.addEventListener("click", function(event){
     // Atualiza o total das despesas
     updateTotals()
 })
+
+// Função para limpar o formulário
+function formClear(){
+    expense.value = "" // Limpa o campo de despesa
+    category.value = "" // Limpa o campo de categoria
+    amount.value = "" // Limpa o campo de valor
+
+    expense.focus() // Foca no campo de despesa
+}
