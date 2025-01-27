@@ -152,3 +152,17 @@ function updateTotals() {
         alert("Erro ao somar o total")
     }
 }
+
+// Adiciona um evento de clique à lista de despesas
+expenseList.addEventListener("click", function(event){
+
+    // Verifica se o elemento clicado é o ícone de remover
+    if(event.target.classList.contains("remove-icon")){
+        // Seleciona o item de despesa mais próximo e o remove
+        const item = event.target.closest(".expense")
+        item.remove()
+    }
+
+    // Atualiza o total das despesas
+    updateTotals()
+})
