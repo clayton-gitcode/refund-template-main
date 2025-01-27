@@ -9,6 +9,7 @@ const category = document.getElementById("category")
 //seleciona os elementos da lista.
 const expenseList = document.querySelector("ul")
 const expensesQuantity = document.querySelector("aside header p  span")
+const expenseTotal = document.querySelector("aside header h2")
 
 // Adiciona um evento de input ao elemento "amount"
 amount.oninput = () => {
@@ -119,7 +120,9 @@ function updateTotals() {
             const itemAmount = items[i].querySelector(".expense-amount");
 
             // Remove caracteres não numéricos e converte para número
-            let value = itemAmount.textContent.replace(/[^\d]/g, "").replace(",", ".")
+            let value = itemAmount.textContent.replace(
+                /[^\d,]/g, ""
+            ).replace(",", ".")
 
             value = parseFloat(value)
 
@@ -131,6 +134,18 @@ function updateTotals() {
             // Adiciona o valor ao total
             total += Number(value)
         }
+
+        //Cria a span R$ formatada
+        const symbolBRL = document.createElement("small")
+        symbolBRL.textContent = "R$"
+
+        //Formata o valor e remove o R$, para ser exibido pela tag small
+        total = formatCurrencyBRL(total).toUpperCase().replace("R$", "")
+
+        //Limpa o conteudo do elemento
+        expenseTotal.innerHTML = ""
+        expenseTotal.append(symbolBRL, total)
+
     } catch (error) {
         // Exibe um alerta em caso de erro
         console.log(error)
