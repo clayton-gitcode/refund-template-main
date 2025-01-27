@@ -19,6 +19,4 @@ styles.css
 - Atualizar automaticamente o total de despesas.
 - Remover despesas da lista.
 
-![Exemplo de Uso](img/exemplo-uso.png)
-
 ![{97D8D743-7458-42FE-8DE2-A9C548D5F29F}](https://github.com/user-attachments/assets/3325e09a-9024-484b-93c5-fa467c8f8f30)
